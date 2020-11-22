@@ -29,5 +29,17 @@ namespace TremorV2
         {
             Camera.Position = new Point3D((Camera.Position.X - e.Delta / 360D), (Camera.Position.Y - e.Delta / 360D), (Camera.Position.Z - e.Delta / 360D));
         }
+
+        private void RandomCard(object sender, RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            int facevalue,counter=0;
+            counter++;
+            facevalue = rnd.Next(1, 53);
+            c1.Content = counter;
+            Uri Carte = new Uri("pack://application:,,,/TremorV2;component/" + facevalue + ".png", UriKind.RelativeOrAbsolute);
+            BitmapImage CardFace = new BitmapImage(Carte);
+            CardBack.ImageSource = CardFace;
+        }    
     }
 }

@@ -61,33 +61,34 @@
                     <AmbientLight Color="White" />
                 </ModelVisual3D.Content>
             </ModelVisual3D>
+
             <ModelVisual3D>
-            <Viewport2DVisual3D>
-            <!-- Top -->
+                <Viewport2DVisual3D>
+                    <!-- Top -->
                     <Viewport2DVisual3D.Geometry>
                         <MeshGeometry3D
             Positions = "-1,0,2 1,0,2 1,0,-1 -1,0,-1"
             TriangleIndices = "0 1 2     2,3,0"
             TextureCoordinates="0,1 1,1 1,0 0,0"
         />
-                </Viewport2DVisual3D.Geometry>
-                <Button Width="100px" Height="100px" Background="Transparent">
-                    <StackPanel>
-                        <Ellipse Height="40" Width="60" Fill="Blue"/>
-                        <TextBlock TextAlignment="Center">Bouton</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Viewport2DVisual3D.Material>
-                    <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True">
-                        <DiffuseMaterial.Brush>
-                            <ImageBrush ImageSource="0.png"/>
-                            
-                        </DiffuseMaterial.Brush>
-                    </DiffuseMaterial>
-                </Viewport2DVisual3D.Material>
-                
+                    </Viewport2DVisual3D.Geometry>
+                    <Button Width="100px" Height="100px" Background="Transparent" Click="RandomCard">
+                        <StackPanel>
+                            <Ellipse Height="40" Width="60" Fill="Blue"/>
+                            <TextBlock TextAlignment="Center">Bouton</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Viewport2DVisual3D.Material>
+                        <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True">
+                            <DiffuseMaterial.Brush>
+                                <ImageBrush ImageSource="0.png"/>
 
-            </Viewport2DVisual3D>
+                            </DiffuseMaterial.Brush>
+                        </DiffuseMaterial>
+                    </Viewport2DVisual3D.Material>
+
+
+                </Viewport2DVisual3D>
 
                 <Viewport2DVisual3D>
                     <!-- Bottom -->
@@ -106,10 +107,9 @@
                         </StackPanel>
                     </Button>
                     <Viewport2DVisual3D.Material>
-                        <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True">
+                        <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="False">
                             <DiffuseMaterial.Brush>
-                                <ImageBrush ImageSource="0.png"/>
-
+                                <ImageBrush x:Name="CardBack" ImageSource="0.png"/>
                             </DiffuseMaterial.Brush>
                         </DiffuseMaterial>
                     </Viewport2DVisual3D.Material>
@@ -120,5 +120,7 @@
             </ModelVisual3D>
 
         </Viewport3D>
+        <Label x:Name="c1" Content="UNDEF" Grid.Column="1" HorizontalAlignment="Left" Margin="148,197,0,0" VerticalAlignment="Top"/>
+        <Button Content="Autre bouton" Grid.Column="1" HorizontalAlignment="Left" Margin="141,164,0,0" VerticalAlignment="Top" Width="75" Click="RandomCard"/>
     </Grid>
 </Window>
