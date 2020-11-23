@@ -361,6 +361,9 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Label x:Name="c1" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="368,525,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="c2" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="368,556,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="c3" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="368,582,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 

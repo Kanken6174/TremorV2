@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
+using System;
 
 namespace TremorV2
 {
@@ -37,7 +38,7 @@ namespace TremorV2
             {
                 await Task.Delay(10);
                 if (XOR.Value != 180)
-                    XOR.Value = XOR.Value + 1;
+                    XOR.Value++;
                 else
                     XOR.Value = -180;
             }
@@ -53,7 +54,7 @@ namespace TremorV2
                     LidOpen = !LidOpen;
                     while (LidAngle.Value != 0)
                     {
-                        LidAngle.Value = LidAngle.Value - 1;
+                        LidAngle.Value--;
                         await Task.Delay(10);
                     }
 
@@ -63,7 +64,7 @@ namespace TremorV2
                     LidOpen = !LidOpen;
                     while (LidAngle.Value != 14)
                     {
-                        LidAngle.Value = LidAngle.Value + 1;
+                        LidAngle.Value--;
                         await Task.Delay(10);
                     }
                 }
@@ -94,36 +95,47 @@ namespace TremorV2
         private async void LidToggleXYZ(object sender, RoutedEventArgs e)
         {
             InAction = true;
+            anim = false;
             if (LidOpen)
             {
                 LidOpen = !LidOpen;
                 while (LidAngle.Value != 0)
                 {
-                    LidAngle.Value = LidAngle.Value - 1;
+                    LidAngle.Value--;
                     await Task.Delay(10);
                 }
             }
 
             do
-                await transformto(6, -28, 1);
+                await TransformTo(6, -28, 1, 300);
             while (InAction);
 
             LidOpen = !LidOpen;
             while (LidAngle.Value != 14)
             {
-                LidAngle.Value = LidAngle.Value + 1;
+                LidAngle.Value++;
                 await Task.Delay(10);
             }
-
+            InAction = false;
         }
 
-        private async Task transformto(double x, double y, double z)
+        private async Task TransformTo(double xr, double yr, double zr, int maxwait)
         {
+            double x = Math.Ceiling(xr);
+            double y = Math.Ceiling(yr);
+            double z = Math.Ceiling(zr);
+
+            vscroll.Value = Math.Ceiling(vscroll.Value);
+            hscroll.Value = Math.Ceiling(hscroll.Value);
+            XOR.Value = Math.Ceiling(XOR.Value);
+
             bool finishX = false, finishY = false, finishZ = false;
+            int c = 0;
             InAction = true;
 
             while (!finishX || !finishY || !finishZ)
             {
+
                 await Task.Delay(10);
                 if (vscroll.Value != x)
                 {
@@ -155,6 +167,17 @@ namespace TremorV2
                 else
                     finishZ = true;
 
+                c++;
+
+                if(c> maxwait)
+                {
+                    vscroll.Value = x;
+                    hscroll.Value = y;
+                    XOR.Value = z;
+                    finishX = true;
+                    finishY = true;
+                    finishZ = true;
+                }
             }
             InAction = false;
 
